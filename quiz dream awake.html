@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Dream Awake Experiences</title>
+
+  <style>
+    :root {
+      --cream: #fff8ef;
+      --sand: #f3dfc9;
+      --copper: #c98a5d;
+      --copper-dark: #9f633f;
+      --earth: #5d4636;
+      --lake: #75a9a2;
+      --lake-dark: #477d77;
+      --green: #8aa36f;
+      --white-glass: rgba(255, 255, 255, 0.86);
+      --shadow: 0 18px 45px rgba(66, 48, 32, 0.16);
+      --radius: 26px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--earth);
+      background:
+        linear-gradient(180deg, rgba(255, 248, 239, 0.92), rgba(243, 223, 201, 0.78)),
+        url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,248,239,0.82));
+      box-shadow: var(--shadow);
+      padding: 24px 20px 0;
+      border: 1px solid rgba(201, 138, 93, 0.22);
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-name {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--copper-dark);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      line-height: 1.15;
+      color: var(--earth);
+    }
+
+    .intro {
+      margin: 12px auto 18px;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: #6a5241;
+      max-width: 420px;
+    }
+
+    .nature-scene {
+      position: relative;
+      height: 190px;
+      margin: 12px -20px 0;
+      background: linear-gradient(180deg, #f6c98d 0%, #f4dfbd 36%, #c8ded6 100%);
+      overflow: hidden;
+    }
+
+    .sun {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: #e7a56d;
+      top: 28px;
+      right: 42px;
+      box-shadow: 0 0 40px rgba(231, 165, 109, 0.55);
+    }
+
+    .mountain {
+      position: absolute;
+      bottom: 58px;
+      width: 115%;
+      height: 130px;
+      left: -8%;
+      background: linear-gradient(135deg, #8aa36f, #5f7b58);
+      clip-path: polygon(0 100%, 18% 42%, 34% 78%, 52% 25%, 72% 76%, 88% 38%, 100% 100%);
+      opacity: 0.95;
+    }
+
+    .mountain.second {
+      bottom: 42px;
+      height: 108px;
+      background: linear-gradient(135deg, #b68a62, #8b6a4d);
+      opacity: 0.65;
+      transform: scaleX(1.08);
+    }
+
+    .lake {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 76px;
+      background: linear-gradient(180deg, var(--lake), var(--lake-dark));
+    }
+
+    .lake::before,
+    .lake::after {
+      content: "";
+      position: absolute;
+      left: 12%;
+      width: 76%;
+      height: 2px;
+      background: rgba(255,255,255,0.42);
+      border-radius: 20px;
+    }
+
+    .lake::before {
+      top: 22px;
+    }
+
+    .lake::after {
+      top: 44px;
+      width: 56%;
+      left: 24%;
+      opacity: 0.7;
+    }
+
+    .reeds {
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      width: 80px;
+      height: 70px;
+      background:
+        linear-gradient(80deg, transparent 45%, #6c7e4e 46%, #6c7e4e 48%, transparent 49%),
+        linear-gradient(100deg, transparent 50%, #6c7e4e 51%, #6c7e4e 53%, transparent 54%),
+        linear-gradient(70deg, transparent 58%, #6c7e4e 59%, #6c7e4e 61%, transparent 62%);
+      opacity: 0.85;
+    }
+
+    .quiz-box {
+      background: var(--white-glass);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.55);
+    }
+
+    .progress-wrap {
+      margin-bottom: 18px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: #7a5f4a;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .progress {
+      width: 100%;
+      height: 9px;
+      background: rgba(201, 138, 93, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--copper), var(--lake-dark));
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .question-card {
+      display: none;
+      animation: fade 0.25s ease;
+    }
+
+    .question-card.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .question {
+      font-size: 1.2rem;
+      line-height: 1.35;
+      margin: 0 0 18px;
+      color: var(--earth);
+    }
+
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(201, 138, 93, 0.22);
+      background: rgba(255,255,255,0.82);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-size: 0.96rem;
+      line-height: 1.35;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      background: #fff;
+      border-color: rgba(201, 138, 93, 0.55);
+    }
+
+    .option input {
+      margin-top: 2px;
+      accent-color: var(--copper-dark);
+      transform: scale(1.1);
+    }
+
+    .option.selected {
+      background: rgba(201, 138, 93, 0.12);
+      border-color: var(--copper);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    button {
+      flex: 1;
+      border: none;
+      padding: 14px 16px;
+      border-radius: 999px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.72);
+      color: var(--earth);
+      border: 1px solid rgba(93, 70, 54, 0.14);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--copper-dark), var(--lake-dark));
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(71, 125, 119, 0.22);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .result {
+      display: none;
+      background: var(--white-glass);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.55);
+      animation: fade 0.25s ease;
+    }
+
+    .result h2 {
+      margin: 0 0 10px;
+      font-size: 1.45rem;
+      color: var(--copper-dark);
+      text-align: center;
+    }
+
+    .profile-title {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--lake-dark);
+      margin-bottom: 14px;
+    }
+
+    .result p {
+      font-size: 0.98rem;
+      line-height: 1.65;
+      margin: 12px 0;
+    }
+
+    .debrief {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.78);
+      border-left: 5px solid var(--copper);
+      border-radius: 16px;
+      padding: 14px 15px;
+      line-height: 1.6;
+      font-size: 0.96rem;
+    }
+
+    .note {
+      margin-top: 16px;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: #705946;
+      background: rgba(117, 169, 162, 0.1);
+      padding: 13px;
+      border-radius: 16px;
+    }
+
+    .restart {
+      margin-top: 18px;
+      width: 100%;
+    }
+
+    @media (min-width: 760px) {
+      .page {
+        padding: 36px 20px;
+      }
+
+      .app {
+        max-width: 760px;
+      }
+
+      .hero {
+        padding: 34px 36px 0;
+      }
+
+      h1 {
+        font-size: 2.25rem;
+      }
+
+      .intro {
+        font-size: 1.05rem;
+      }
+
+      .nature-scene {
+        height: 230px;
+        margin: 18px -36px 0;
+      }
+
+      .quiz-box,
+      .result {
+        padding: 28px;
+      }
+
+      .question {
+        font-size: 1.32rem;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .option {
+        margin-bottom: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="app">
+
+      <section class="hero">
+        <div class="brand">
+          <div class="brand-name">Dream Awake Experiences</div>
+          <h1>Quel type de voyageur êtes-vous ?</h1>
+          <p class="intro">
+            Un quiz ludique pour découvrir votre énergie du moment, votre rapport au bien-être
+            et la manière dont vous allez vivre cette parenthèse nature au bord du lac.
+          </p>
+        </div>
+
+        <div class="nature-scene">
+          <div class="sun"></div>
+          <div class="mountain second"></div>
+          <div class="mountain"></div>
+          <div class="lake"></div>
+          <div class="reeds"></div>
+        </div>
+      </section>
+
+      <section class="quiz-box" id="quizBox">
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span id="stepText">Question 1 sur 8</span>
+            <span id="percentText">12%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <form id="quizForm">
+
+          <div class="question-card active">
+            <h2 class="question">1. En arrivant à la retraite, votre premier réflexe est :</h2>
+            <div class="options-grid">
+              <label class="option"><input type="radio" name="q1" value="A"> Me poser, respirer et profiter du cadre</label>
+              <label class="option"><input type="radio" name="q1" value="B"> Aller vers les autres et créer du lien</label>
+              <label class="option"><input type="radio" name="q1" value="C"> Explorer le lieu et repérer les meilleurs spots</label>
+              <label class="option"><input type="radio" name="q1" value="D"> Observer tranquillement avant de me lancer</label>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <h2 class="question">2. Ce que vous venez chercher en priorité :</h2>
+            <div class="options-grid">
+              <label class="option"><input type="radio" name="q2" value="A"> De la déconnexion</label>
+              <label class="option"><input type="radio" name="q2" value="B"> Des rencontres humaines</label>
+              <label class="option"><input type="radio" name="q2" value="C"> De nouvelles expériences</label>
+              <label class="option"><input type="radio" name="q2" value="D"> Un recentrage intérieur</label>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <h2 class="question">3. Le yoga, pour vous, c’est surtout :</h2>
+            <div class="options-grid">
+              <label class="option"><input type="radio" name="q3" value="A"> Un moyen de relâcher les tensions</label>
+              <label class="option"><input type="radio" name="q3" value="B"> Un moment agréable à partager</label>
+              <label class="option"><input type="radio" name="q3" value="C"> Une pratique à découvrir</label>
+              <label class="option"><input type="radio" name="q3" value="D"> Une manière d’écouter son corps</label>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <h2 class="question">4. Pendant une méditation, le plus grand défi pour vous serait :</h2>
+            <div class="options-grid">
+              <label class="option"><input type="radio" name="q4" value="A"> Calmer le mental</label>
+              <label class="option"><input type="radio" name="q4" value="B"> Rester pleinement dans le moment</label>
+              <label class="option"><input type="radio" name="q4" value="C"> Aller au bout de l’expérience avec curiosité</label>
+              <label class="option"><input type="radio" name="q4" value="D"> Accepter de ne rien contrôler</label>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <h2 class="question">5. Le sound healing vous évoque plutôt :</h2>
+            <div class="options-grid">
+              <label class="option"><input type="radio" name="q5" value="A"> Une relaxation profonde</label>
+              <label class="option"><input type="radio" name="q5" value="B"> Un moment collectif apaisant</label>
+              <label class="option"><input type="radio" name="q5" value="C"> Une expérience sensorielle intrigante</label>
+              <label class="option"><input type="radio" name="q5" value="D"> Un vrai lâcher-prise intérieur</label>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <h2 class="question">6. Face au pranic healing ou à l’auriculothérapie, vous êtes plutôt :</h2>
+            <div class="options-grid">
+              <label class="option"><input type="radio" name="q6" value="A"> Ouvert si cela peut m’aider à me détendre</label>
+              <label class="option"><input type="radio" name="q6" value="B"> Curieux si l’expérience est bien accompagnée</label>
+              <label class="option"><input type="radio" name="q6" value="C"> Intéressé par la découverte de nouvelles pratiques</label>
+              <label class="option"><input type="radio" name="q6" value="D"> Prudent mais sincèrement ouvert</label>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <h2 class="question">7. Une retraite réussie, pour vous, c’est :</h2>
+            <div class="options-grid">
+              <label class="option"><input type="radio" name="q7" value="A"> Repartir plus léger</label>
+              <label class="option"><input type="radio" name="q7" value="B"> Repartir avec de belles connexions</label>
+              <label class="option"><input type="radio" name="q7" value="C"> Repartir avec des souvenirs forts</label>
+              <label class="option"><input type="radio" name="q7" value="D"> Repartir plus aligné avec moi-même</label>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <h2 class="question">8. Ce paysage au bord du lac vous inspire avant tout :</h2>
+            <div class="options-grid">
+              <label class="option"><input type="radio" name="q8" value="A"> Le calme</label>
+              <label class="option"><input type="radio" name="q8" value="B"> Le partage</label>
+              <label class="option"><input type="radio" name="q8" value="C"> L’évasion</label>
+              <label class="option"><input type="radio" name="q8" value="D"> L’introspection</label>
+            </div>
+          </div>
+
+          <div class="buttons">
+            <button type="button" class="btn-secondary" id="prevBtn">Précédent</button>
+            <button type="button" class="btn-primary" id="nextBtn">Suivant</button>
+          </div>
+
+        </form>
+      </section>
+
+      <section class="result" id="result">
+        <h2>Votre profil Dream Awake</h2>
+        <div class="profile-title" id="profileTitle"></div>
+        <p id="profileText"></p>
+        <div class="debrief" id="debriefText"></div>
+
+        <div class="note">
+          Les pratiques proposées dans le cadre de Dream Awake Experiences sont pensées comme des expériences
+          de bien-être, de relaxation, de reconnexion et de découverte personnelle. Elles ne remplacent en aucun cas
+          un avis, un diagnostic ou un traitement médical.
+        </div>
+
+        <button type="button" class="btn-primary restart" onclick="restartQuiz()">Recommencer le quiz</button>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    const cards = document.querySelectorAll(".question-card");
+    const total = cards.length;
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const stepText = document.getElementById("stepText");
+    const percentText = document.getElementById("percentText");
+    const progressBar = document.getElementById("progressBar");
+    const quizBox = document.getElementById("quizBox");
+    const resultBox = document.getElementById("result");
+
+    let current = 0;
+
+    function updateUI() {
+      cards.forEach((card, index) => {
+        card.classList.toggle("active", index === current);
+      });
+
+      const percent = Math.round(((current + 1) / total) * 100);
+
+      stepText.textContent = `Question ${current + 1} sur ${total}`;
+      percentText.textContent = `${percent}%`;
+      progressBar.style.width = `${percent}%`;
+
+      prevBtn.disabled = current === 0;
+      nextBtn.textContent = current === total - 1 ? "Voir mon résultat" : "Suivant";
+    }
+
+    function selectedAnswer(index) {
+      return document.querySelector(`input[name="q${index + 1}"]:checked`);
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (!selectedAnswer(current)) {
+        alert("Merci de choisir une réponse avant de continuer.");
+        return;
+      }
+
+      if (current < total - 1) {
+        current++;
+        updateUI();
+      } else {
+        showResult();
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        updateUI();
+      }
+    });
+
+    document.querySelectorAll(".option input").forEach(input => {
+      input.addEventListener("change", () => {
+        document.querySelectorAll(`input[name="${input.name}"]`).forEach(radio => {
+          radio.closest(".option").classList.remove("selected");
+        });
+
+        input.closest(".option").classList.add("selected");
+      });
+    });
+
+    function showResult() {
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+
+      for (let i = 1; i <= total; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        counts[answer.value]++;
+      }
+
+      let top = "A";
+      ["B", "C", "D"].forEach(key => {
+        if (counts[key] > counts[top]) {
+          top = key;
+        }
+      });
+
+      const profiles = {
+        A: {
+          title: "Le Rechargeur d’énergie",
+          text: "Vous venez chercher une vraie pause. Votre besoin principal est de ralentir, respirer, relâcher la pression et vous laisser porter par la douceur de l’expérience.",
+          debrief: "Débrief : votre énergie du moment appelle de l’espace, du repos et de la légèreté. Cette retraite peut vous aider à retrouver du calme, à mieux écouter votre corps et à repartir plus apaisé."
+        },
+        B: {
+          title: "Le Connecteur",
+          text: "Vous vivez pleinement les expériences à travers le lien humain. Vous aimez les échanges spontanés, l’énergie du groupe, les discussions sincères et les moments partagés.",
+          debrief: "Débrief : votre force est votre ouverture aux autres. Les moments collectifs, les cercles de parole et les instants de connexion seront probablement parmi les plus marquants de votre séjour."
+        },
+        C: {
+          title: "L’Explorateur",
+          text: "Vous aimez découvrir, ressentir, tester et sortir du cadre. Vous êtes attiré par le dépaysement, les pratiques nouvelles, l’ambiance du lieu et tout ce qui transforme un week-end en souvenir fort.",
+          debrief: "Débrief : votre curiosité est un vrai moteur. Cette retraite peut nourrir votre besoin d’expériences nouvelles tout en vous invitant à ralentir pour savourer chaque moment."
+        },
+        D: {
+          title: "L’Introspectif",
+          text: "Vous venez chercher du sens, de la profondeur et une reconnexion authentique à vous-même. Vous êtes sensible aux temps de silence, à la méditation et aux pratiques qui favorisent l’écoute intérieure.",
+          debrief: "Débrief : cette retraite peut être pour vous un espace de recentrage. En vous donnant l’autorisation de ralentir et de ressentir, vous pourriez repartir avec plus de clarté, d’ancrage et de sérénité."
+        }
+      };
+
+      document.getElementById("profileTitle").textContent = profiles[top].title;
+      document.getElementById("profileText").textContent = profiles[top].text;
+      document.getElementById("debriefText").textContent = profiles[top].debrief;
+
+      quizBox.style.display = "none";
+      resultBox.style.display = "block";
+      resultBox.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function restartQuiz() {
+      current = 0;
+      document.getElementById("quizForm").reset();
+
+      document.querySelectorAll(".option").forEach(option => {
+        option.classList.remove("selected");
+      });
+
+      resultBox.style.display = "none";
+      quizBox.style.display = "block";
+      updateUI();
+      quizBox.scrollIntoView({ behavior: "smooth" });
+    }
+
+    updateUI();
+  </script>
+</body>
+</html>
